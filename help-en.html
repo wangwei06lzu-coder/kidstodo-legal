@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help — KidsToDo</title>
+  <meta name="description" content="How to use KidsToDo, FAQ, and support information">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f9fafb; color: #1a1a1a; line-height: 1.7; overflow-x: hidden;
+    }
+    .hero {
+      background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 40%, #4F46E5 100%);
+      color: white; text-align: center; padding: 60px 20px 48px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 40px; background: #f9fafb; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    .hero-emoji { font-size: 56px; margin-bottom: 12px; }
+    .hero h1 { font-size: 32px; font-weight: 900; margin-bottom: 8px; }
+    .hero p { font-size: 16px; opacity: 0.9; }
+    .lang-bar {
+      position: absolute; top: 16px; right: 16px;
+      display: flex; gap: 6px;
+    }
+    .lang-bar a {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;
+      font-weight: 600; padding: 4px 12px; border-radius: 99px;
+      background: rgba(255,255,255,0.15); transition: all 0.15s;
+    }
+    .lang-bar a:hover, .lang-bar a.active { background: white; color: #6D28D9; }
+    .container { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-size: 22px; font-weight: 800; color: #111827;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .faq { background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f3f4f6; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      padding: 20px 24px; font-weight: 700; font-size: 15px; color: #111;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.15s;
+    }
+    .faq-q:hover { background: #faf5ff; }
+    .faq-q::after { content: '+'; font-size: 20px; color: #7C3AED; font-weight: 400; transition: transform 0.2s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px; font-size: 14px; color: #4b5563; line-height: 1.8;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 24px 20px; }
+
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .guide-card {
+      background: white; border-radius: 16px; padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center;
+    }
+    .guide-emoji { font-size: 36px; margin-bottom: 12px; }
+    .guide-title { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 6px; }
+    .guide-desc { font-size: 13px; color: #6b7280; line-height: 1.6; }
+
+    .contact-card {
+      background: white; border-radius: 16px; padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center;
+    }
+    .contact-card p { font-size: 15px; color: #4b5563; margin-bottom: 16px; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #EDE9FE; color: #6D28D9; text-decoration: none;
+      padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 15px;
+      transition: transform 0.15s;
+    }
+    .contact-email:hover { transform: scale(1.05); }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #7C3AED; text-decoration: none; font-weight: 600; font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    footer {
+      background: #111827; color: #9ca3af; text-align: center; padding: 32px 20px;
+    }
+    .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .footer-links a { color: #d1d5db; text-decoration: none; font-size: 13px; }
+    .footer-links a:hover { color: white; }
+    .footer-copy { font-size: 12px; }
+
+    @media (max-width: 520px) {
+      .hero { padding: 48px 16px 40px; }
+      .hero h1 { font-size: 24px; }
+      .container { padding: 24px 16px 60px; }
+      .section-title { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="lang-bar">
+      <a href="help.html">日本語</a>
+      <a href="help-en.html" class="active">EN</a>
+      <a href="help-zh.html">中文</a>
+    </div>
+    <div class="hero-emoji">❓</div>
+    <h1>Help & Support</h1>
+    <p>How to use KidsToDo and frequently asked questions</p>
+  </div>
+
+  <div class="container">
+
+    <a href="index-en.html" class="back-link">&larr; Back to Home</a>
+
+    <!-- Getting Started -->
+    <div class="section">
+      <h2 class="section-title">📖 Getting Started</h2>
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-emoji">👨‍👩‍👧</div>
+          <div class="guide-title">1. Create Parent Account</div>
+          <div class="guide-desc">Open the app, select "Parent", and sign up with your email address.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">👧</div>
+          <div class="guide-title">2. Add a Child</div>
+          <div class="guide-desc">Tap "Add Child" on the dashboard. Set a name, grade, username, and password.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">🔑</div>
+          <div class="guide-title">3. Child Logs In</div>
+          <div class="guide-desc">On the child screen, log in using the username and password you set up.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">🚀</div>
+          <div class="guide-title">4. Start Using</div>
+          <div class="guide-desc">Manage tasks, take learning quizzes, care for your virtual pet, and earn rewards!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+      <h2 class="section-title">💬 Frequently Asked Questions</h2>
+      <div class="faq">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What age group is KidsToDo for?</div>
+          <div class="faq-a">KidsToDo is designed for children aged 5 to 12. Learning quizzes cover content from 1st through 6th grade.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How many children can I add?</div>
+          <div class="faq-a">The free plan supports up to 2 children. Plus and Pro plans allow more.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How are quiz questions selected?</div>
+          <div class="faq-a">Questions are chosen by an adaptive algorithm based on your child's grade and performance. It increases difficulty for strong areas and provides extra practice for weak ones, using spaced repetition for optimal retention.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do points and rewards work?</div>
+          <div class="faq-a">Parents assign points to tasks. When a child completes a task and the parent approves it, points are awarded. Children can exchange accumulated points for rewards from their wish list. Parents set the rewards and required points.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is the virtual pet?</div>
+          <div class="faq-a">Each child gets a virtual pet to take care of by feeding, playing, and answering quizzes. The pet grows, levels up, and evolves as the child completes tasks and learns.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my child's data safe?</div>
+          <div class="faq-a">Yes. We comply with COPPA (Children's Online Privacy Protection Act). All data is encrypted in transit and at rest. We never sell data to third parties and use no ads or tracking SDKs.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can another parent co-manage?</div>
+          <div class="faq-a">Yes. Use the "Family Members" feature to invite another parent with an invite code. Both parents can manage tasks, approve submissions, and view reports.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if I forget my password?</div>
+          <div class="faq-a">Parent account: Tap "Forgot Password" on the login screen to receive a reset email. Child account: Reset the password from the parent's settings screen.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I delete my account?</div>
+          <div class="faq-a">Go to Settings and tap "Delete Account". All data will be permanently erased. This action cannot be undone.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does it work offline?</div>
+          <div class="faq-a">Learning quizzes can work offline with cached questions. However, submitting tasks and syncing new data requires an internet connection.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="section">
+      <h2 class="section-title">📩 Contact Us</h2>
+      <div class="contact-card">
+        <p>Still need help? We'd love to hear from you.<br>We typically reply within 1-2 business days.</p>
+        <a href="mailto:support@kidstodo.vip" class="contact-email">
+          ✉️ support@kidstodo.vip
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index-en.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 KidsToDo. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

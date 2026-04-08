@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ヘルプ — KidsToDo</title>
+  <meta name="description" content="KidsToDoの使い方・よくある質問・サポート情報">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans',
+                   'Noto Sans CJK JP', sans-serif;
+      background: #f9fafb; color: #1a1a1a; line-height: 1.7; overflow-x: hidden;
+    }
+    .hero {
+      background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 40%, #4F46E5 100%);
+      color: white; text-align: center; padding: 60px 20px 48px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 40px; background: #f9fafb; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    .hero-emoji { font-size: 56px; margin-bottom: 12px; }
+    .hero h1 { font-size: 32px; font-weight: 900; margin-bottom: 8px; }
+    .hero p { font-size: 16px; opacity: 0.9; }
+    .lang-bar {
+      position: absolute; top: 16px; right: 16px;
+      display: flex; gap: 6px;
+    }
+    .lang-bar a {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;
+      font-weight: 600; padding: 4px 12px; border-radius: 99px;
+      background: rgba(255,255,255,0.15); transition: all 0.15s;
+    }
+    .lang-bar a:hover, .lang-bar a.active { background: white; color: #6D28D9; }
+    .container { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-size: 22px; font-weight: 800; color: #111827;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .faq { background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f3f4f6; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      padding: 20px 24px; font-weight: 700; font-size: 15px; color: #111;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.15s;
+    }
+    .faq-q:hover { background: #faf5ff; }
+    .faq-q::after { content: '+'; font-size: 20px; color: #7C3AED; font-weight: 400; transition: transform 0.2s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px; font-size: 14px; color: #4b5563; line-height: 1.8;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 24px 20px; }
+
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .guide-card {
+      background: white; border-radius: 16px; padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center;
+    }
+    .guide-emoji { font-size: 36px; margin-bottom: 12px; }
+    .guide-title { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 6px; }
+    .guide-desc { font-size: 13px; color: #6b7280; line-height: 1.6; }
+
+    .contact-card {
+      background: white; border-radius: 16px; padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center;
+    }
+    .contact-card p { font-size: 15px; color: #4b5563; margin-bottom: 16px; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #EDE9FE; color: #6D28D9; text-decoration: none;
+      padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 15px;
+      transition: transform 0.15s;
+    }
+    .contact-email:hover { transform: scale(1.05); }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #7C3AED; text-decoration: none; font-weight: 600; font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    footer {
+      background: #111827; color: #9ca3af; text-align: center; padding: 32px 20px;
+    }
+    .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .footer-links a { color: #d1d5db; text-decoration: none; font-size: 13px; }
+    .footer-links a:hover { color: white; }
+    .footer-copy { font-size: 12px; }
+
+    @media (max-width: 520px) {
+      .hero { padding: 48px 16px 40px; }
+      .hero h1 { font-size: 24px; }
+      .container { padding: 24px 16px 60px; }
+      .section-title { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="lang-bar">
+      <a href="help.html" class="active">日本語</a>
+      <a href="help-en.html">EN</a>
+      <a href="help-zh.html">中文</a>
+    </div>
+    <div class="hero-emoji">❓</div>
+    <h1>ヘルプ・サポート</h1>
+    <p>KidsToDoの使い方やよくある質問</p>
+  </div>
+
+  <div class="container">
+
+    <a href="index.html" class="back-link">← トップページに戻る</a>
+
+    <!-- Getting Started -->
+    <div class="section">
+      <h2 class="section-title">📖 はじめかた</h2>
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-emoji">👨‍👩‍👧</div>
+          <div class="guide-title">1. 親アカウント作成</div>
+          <div class="guide-desc">アプリを開いて「保護者」を選択し、メールアドレスで登録します。</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">👧</div>
+          <div class="guide-title">2. 子どもを追加</div>
+          <div class="guide-desc">ダッシュボードから「子どもを追加」をタップ。名前・学年・ユーザー名・パスワードを設定。</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">🔑</div>
+          <div class="guide-title">3. 子どもがログイン</div>
+          <div class="guide-desc">子ども専用画面で、設定したユーザー名とパスワードでログインします。</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">🚀</div>
+          <div class="guide-title">4. 使い始める</div>
+          <div class="guide-desc">タスクの設定、学習クイズ、ペットのお世話、ごほうび交換が楽しめます。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+      <h2 class="section-title">💬 よくある質問</h2>
+      <div class="faq">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">子どもは何歳から使えますか？</div>
+          <div class="faq-a">5歳から12歳のお子さまを対象に設計しています。学習クイズは小学1年生から6年生までの内容に対応しています。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">子どものアカウントは何人まで作れますか？</div>
+          <div class="faq-a">無料プランでは最大2人のお子さまを登録できます。プラスプラン以上ではさらに追加可能です。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">学習クイズの問題はどうやって選ばれますか？</div>
+          <div class="faq-a">お子さまの学年・年齢に合った問題を、自適応アルゴリズムで選出します。得意な分野は難易度が上がり、苦手な分野は反復練習できるよう調整されます。間隔反復（スペースドリピティション）も取り入れています。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">ポイントやごほうびの仕組みは？</div>
+          <div class="faq-a">親がタスクにポイントを設定し、子どもがタスクを完了して親が承認するとポイントが付与されます。貯めたポイントは「ウィッシュリスト」のごほうびと交換できます。ごほうびの内容と必要ポイントは親が自由に設定できます。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">バーチャルペットとは？</div>
+          <div class="faq-a">お子さま専用のバーチャルペットです。ごはんをあげたり、遊んだり、クイズに答えたりしてお世話します。タスク完了や学習でペットが成長し、レベルアップ・進化していきます。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">子どものデータは安全ですか？</div>
+          <div class="faq-a">はい。COPPA（児童オンラインプライバシー保護法）に準拠しています。データはすべて暗号化して保存・通信しており、第三者への販売は一切行いません。広告やトラッキングSDKも使用していません。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">他の保護者も一緒に管理できますか？</div>
+          <div class="faq-a">はい。「ファミリーメンバー」機能で、もう一人の保護者を招待してお子さまを共同で管理できます。招待コードを使って簡単に追加できます。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">パスワードを忘れた場合は？</div>
+          <div class="faq-a">親アカウント：ログイン画面の「パスワードを忘れた方」からリセットメールを送信できます。子アカウント：親アカウントの設定画面からパスワードをリセットできます。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">アカウントを削除するには？</div>
+          <div class="faq-a">設定画面の「アカウント削除」からいつでも削除できます。削除するとすべてのデータが完全に消去されます。この操作は元に戻せません。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">オフラインでも使えますか？</div>
+          <div class="faq-a">学習クイズはキャッシュされた問題であればオフラインでも利用できます。ただし、タスクの完了報告や新しいデータの同期にはインターネット接続が必要です。</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="section">
+      <h2 class="section-title">📩 お問い合わせ</h2>
+      <div class="contact-card">
+        <p>解決しない問題がありましたら、お気軽にご連絡ください。<br>通常1〜2営業日以内にご返信いたします。</p>
+        <a href="mailto:support@kidstodo.vip" class="contact-email">
+          ✉️ support@kidstodo.vip
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">トップ</a>
+      <a href="privacy-ja.html">プライバシーポリシー</a>
+      <a href="terms-ja.html">利用規約</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 KidsToDo. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帮助 — KidsToDo</title>
+  <meta name="description" content="KidsToDo使用指南、常见问题及支持信息">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+                   'Noto Sans SC', sans-serif;
+      background: #f9fafb; color: #1a1a1a; line-height: 1.7; overflow-x: hidden;
+    }
+    .hero {
+      background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 40%, #4F46E5 100%);
+      color: white; text-align: center; padding: 60px 20px 48px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 40px; background: #f9fafb; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    .hero-emoji { font-size: 56px; margin-bottom: 12px; }
+    .hero h1 { font-size: 32px; font-weight: 900; margin-bottom: 8px; }
+    .hero p { font-size: 16px; opacity: 0.9; }
+    .lang-bar {
+      position: absolute; top: 16px; right: 16px;
+      display: flex; gap: 6px;
+    }
+    .lang-bar a {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;
+      font-weight: 600; padding: 4px 12px; border-radius: 99px;
+      background: rgba(255,255,255,0.15); transition: all 0.15s;
+    }
+    .lang-bar a:hover, .lang-bar a.active { background: white; color: #6D28D9; }
+    .container { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-size: 22px; font-weight: 800; color: #111827;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .faq { background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f3f4f6; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      padding: 20px 24px; font-weight: 700; font-size: 15px; color: #111;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.15s;
+    }
+    .faq-q:hover { background: #faf5ff; }
+    .faq-q::after { content: '+'; font-size: 20px; color: #7C3AED; font-weight: 400; transition: transform 0.2s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px; font-size: 14px; color: #4b5563; line-height: 1.8;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 24px 20px; }
+
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .guide-card {
+      background: white; border-radius: 16px; padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center;
+    }
+    .guide-emoji { font-size: 36px; margin-bottom: 12px; }
+    .guide-title { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 6px; }
+    .guide-desc { font-size: 13px; color: #6b7280; line-height: 1.6; }
+
+    .contact-card {
+      background: white; border-radius: 16px; padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center;
+    }
+    .contact-card p { font-size: 15px; color: #4b5563; margin-bottom: 16px; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #EDE9FE; color: #6D28D9; text-decoration: none;
+      padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 15px;
+      transition: transform 0.15s;
+    }
+    .contact-email:hover { transform: scale(1.05); }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #7C3AED; text-decoration: none; font-weight: 600; font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    footer {
+      background: #111827; color: #9ca3af; text-align: center; padding: 32px 20px;
+    }
+    .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .footer-links a { color: #d1d5db; text-decoration: none; font-size: 13px; }
+    .footer-links a:hover { color: white; }
+    .footer-copy { font-size: 12px; }
+
+    @media (max-width: 520px) {
+      .hero { padding: 48px 16px 40px; }
+      .hero h1 { font-size: 24px; }
+      .container { padding: 24px 16px 60px; }
+      .section-title { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="lang-bar">
+      <a href="help.html">日本語</a>
+      <a href="help-en.html">EN</a>
+      <a href="help-zh.html" class="active">中文</a>
+    </div>
+    <div class="hero-emoji">❓</div>
+    <h1>帮助与支持</h1>
+    <p>KidsToDo使用指南及常见问题</p>
+  </div>
+
+  <div class="container">
+
+    <a href="index-zh.html" class="back-link">&larr; 返回首页</a>
+
+    <!-- Getting Started -->
+    <div class="section">
+      <h2 class="section-title">📖 快速上手</h2>
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-emoji">👨‍👩‍👧</div>
+          <div class="guide-title">1. 创建家长账户</div>
+          <div class="guide-desc">打开应用，选择"家长"，用邮箱注册。</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">👧</div>
+          <div class="guide-title">2. 添加孩子</div>
+          <div class="guide-desc">在主页点击"添加孩子"，设置姓名、年级、用户名和密码。</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">🔑</div>
+          <div class="guide-title">3. 孩子登录</div>
+          <div class="guide-desc">在孩子端界面，用设置好的用户名和密码登录即可。</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-emoji">🚀</div>
+          <div class="guide-title">4. 开始使用</div>
+          <div class="guide-desc">管理任务、答题学习、照顾宠物、兑换奖励，全家一起成长！</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+      <h2 class="section-title">💬 常见问题</h2>
+      <div class="faq">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">适合几岁的孩子？</div>
+          <div class="faq-a">KidsToDo专为5-12岁的儿童设计。学习题目覆盖小学1年级到6年级的内容。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">最多可以添加几个孩子？</div>
+          <div class="faq-a">免费版最多支持2个孩子。升级到Plus或Pro套餐可以添加更多。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">题目是怎么选择的？</div>
+          <div class="faq-a">系统根据孩子的年级和答题情况，通过自适应算法智能选题。擅长的领域会提高难度，薄弱的领域会加强练习，并采用间隔重复法帮助记忆。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">积分和奖励怎么用？</div>
+          <div class="faq-a">家长给任务设置积分，孩子完成任务后由家长审核通过即可获得积分。积分可以在"心愿单"中兑换奖励。奖励内容和所需积分由家长自行设定。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">虚拟宠物是什么？</div>
+          <div class="faq-a">每个孩子有一只虚拟宠物，可以喂食、玩耍、答题来照顾它。完成任务和学习后宠物会成长、升级、进化。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">孩子的数据安全吗？</div>
+          <div class="faq-a">安全。我们遵守COPPA（儿童在线隐私保护法）。所有数据加密传输和存储，绝不向第三方出售数据，不使用任何广告或追踪SDK。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">可以让另一位家长一起管理吗？</div>
+          <div class="faq-a">可以。通过"家庭成员"功能，用邀请码邀请另一位家长。双方都可以管理任务、审核提交和查看报告。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">忘记密码怎么办？</div>
+          <div class="faq-a">家长账户：在登录页点击"忘记密码"，系统会发送重置邮件。孩子账户：在家长设置页面可以重置孩子的密码。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">如何删除账户？</div>
+          <div class="faq-a">在设置中点击"删除账户"即可。所有数据将被永久清除，此操作不可撤销。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">支持离线使用吗？</div>
+          <div class="faq-a">已缓存的学习题目可以离线使用。但提交任务和同步新数据需要网络连接。</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="section">
+      <h2 class="section-title">📩 联系我们</h2>
+      <div class="contact-card">
+        <p>如有其他问题，欢迎随时联系我们。<br>通常在1-2个工作日内回复。</p>
+        <a href="mailto:support@kidstodo.vip" class="contact-email">
+          ✉️ support@kidstodo.vip
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index-zh.html">首页</a>
+      <a href="privacy-zh.html">隐私政策</a>
+      <a href="terms-zh.html">服务条款</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 KidsToDo. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
