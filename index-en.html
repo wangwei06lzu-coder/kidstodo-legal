@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KidsToDo — Family Task, Learning & Reward App</title>
+  <meta name="description" content="KidsToDo helps families manage tasks, learning, and rewards. Parents assign, children complete, everyone grows together.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif;
+      background: #f9fafb; color: #1a1a1a; line-height: 1.7; overflow-x: hidden;
+    }
+    .hero {
+      background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 40%, #4F46E5 100%);
+      color: white; text-align: center; padding: 80px 20px 60px; position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 40px;
+      background: #f9fafb; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    .hero-logo { font-size: 72px; margin-bottom: 16px; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .hero h1 { font-size: 40px; font-weight: 900; margin-bottom: 12px; }
+    .hero-tagline { font-size: 18px; opacity: 0.9; max-width: 480px; margin: 0 auto 32px; }
+    .hero-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+      padding: 8px 16px; border-radius: 99px; font-size: 14px; font-weight: 600;
+    }
+    .lang-bar { position: absolute; top: 20px; right: 20px; display: flex; gap: 6px; }
+    .lang-bar a {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;
+      font-weight: 600; padding: 4px 12px; border-radius: 99px;
+      background: rgba(255,255,255,0.15); transition: all 0.15s;
+    }
+    .lang-bar a:hover, .lang-bar a.active { background: white; color: #6D28D9; }
+    .section { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+    .section-title { text-align: center; font-size: 28px; font-weight: 800; color: #111827; margin-bottom: 12px; }
+    .section-subtitle { text-align: center; font-size: 16px; color: #6b7280; max-width: 560px; margin: 0 auto 40px; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+    .feature-card {
+      background: white; border-radius: 20px; padding: 32px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(109,40,217,0.12); }
+    .feature-emoji { font-size: 40px; margin-bottom: 16px; }
+    .feature-title { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; color: #6b7280; line-height: 1.7; }
+    .steps { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    .step { text-align: center; flex: 1; min-width: 200px; max-width: 260px; }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #7C3AED, #4F46E5);
+      color: white; font-size: 20px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+    }
+    .step-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #111; }
+    .step-desc { font-size: 14px; color: #6b7280; }
+    .safety-list {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px; max-width: 700px; margin: 0 auto;
+    }
+    .safety-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: white; padding: 20px; border-radius: 14px;
+    }
+    .safety-icon { font-size: 24px; flex-shrink: 0; }
+    .safety-text { font-size: 14px; color: #374151; }
+    .safety-text strong { color: #111; }
+    .cta {
+      text-align: center; padding: 60px 20px;
+      background: linear-gradient(135deg, #7C3AED, #4F46E5); color: white;
+    }
+    .cta h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+    .cta p { font-size: 16px; opacity: 0.9; margin-bottom: 28px; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: white; color: #6D28D9; text-decoration: none;
+      padding: 14px 32px; border-radius: 14px; font-size: 16px; font-weight: 700;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15); transition: transform 0.15s;
+    }
+    .cta-btn:hover { transform: scale(1.05); }
+    footer {
+      background: #111827; color: #9ca3af; text-align: center; padding: 40px 20px;
+    }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
+    .footer-links a { color: #d1d5db; text-decoration: none; font-size: 14px; font-weight: 500; }
+    .footer-links a:hover { color: white; }
+    .footer-copy { font-size: 13px; }
+    @media (max-width: 520px) {
+      .hero { padding: 60px 16px 48px; }
+      .hero h1 { font-size: 28px; }
+      .section { padding: 40px 16px; }
+      .section-title { font-size: 22px; }
+      .steps { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="lang-bar">
+      <a href="index.html">日本語</a>
+      <a href="index-en.html" class="active">EN</a>
+      <a href="index-zh.html">中文</a>
+    </div>
+    <div class="hero-logo">🌟</div>
+    <h1>KidsToDo</h1>
+    <p class="hero-tagline">The family app for tasks, learning & rewards.<br>Parents guide. Children grow. Together.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">📱 iOS</span>
+      <span class="hero-badge">👶 Ages 5-12</span>
+      <span class="hero-badge">🔒 Safe & Private</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Features</h2>
+    <p class="section-subtitle">Everything your family needs to stay organized, learn, and have fun — all in one app.</p>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-emoji">✅</div>
+        <div class="feature-title">Task Management</div>
+        <div class="feature-desc">Assign chores, homework & activities. Children submit photo proof, parents approve & award points.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">📚</div>
+        <div class="feature-title">Learning Quizzes</div>
+        <div class="feature-desc">Fun quizzes in literacy & math, matched to grade level. Auto-generated with SVG illustrations.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">🐾</div>
+        <div class="feature-title">Virtual Pet</div>
+        <div class="feature-desc">Complete tasks to grow your pet. Feed, play, quiz — watch it level up and evolve!</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">🎁</div>
+        <div class="feature-title">Rewards System</div>
+        <div class="feature-desc">Save up points and trade them for real rewards on the wish list. Builds goal-setting skills.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">📖</div>
+        <div class="feature-title">Picture Diary</div>
+        <div class="feature-desc">Record daily moments in a picture diary. Develop writing skills and self-expression.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">📊</div>
+        <div class="feature-title">Learning Reports</div>
+        <div class="feature-desc">Parent dashboard with real-time progress, accuracy rates, and weekly reports delivered automatically.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#f3f0ff; border-radius: 32px; margin: 0 auto; max-width: 960px;">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Three simple steps to get your family started</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Parent Creates Account</div>
+        <div class="step-desc">Sign up with email and add your child's profile. That's it.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Set Up Tasks & Learning</div>
+        <div class="step-desc">Customize chores, quizzes, points, and rewards for your family.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Kids Have Fun</div>
+        <div class="step-desc">Children use their own screen to complete tasks, take quizzes, and grow their pet!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Built for Safety</h2>
+    <p class="section-subtitle">Your child's privacy is our top priority</p>
+    <div class="safety-list">
+      <div class="safety-item">
+        <span class="safety-icon">🔐</span>
+        <div class="safety-text"><strong>COPPA Compliant</strong> — Only parents can create child accounts. Minimal data collection.</div>
+      </div>
+      <div class="safety-item">
+        <span class="safety-icon">🛡️</span>
+        <div class="safety-text"><strong>Encrypted</strong> — All data transmitted via HTTPS/TLS. Passwords stored hashed.</div>
+      </div>
+      <div class="safety-item">
+        <span class="safety-icon">🚫</span>
+        <div class="safety-text"><strong>No Ads</strong> — Zero third-party ads or tracking SDKs. We never sell children's data.</div>
+      </div>
+      <div class="safety-item">
+        <span class="safety-icon">🗑️</span>
+        <div class="safety-text"><strong>Full Deletion</strong> — Delete account = all data permanently erased. Parents in full control.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>Start Your Family Journey</h2>
+    <p>Help your child grow with fun and responsibility</p>
+    <a class="cta-btn" href="#">
+      <span style="font-size:24px"></span> Download on the App Store
+    </a>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <p class="footer-copy">© 2026 KidsToDo. All rights reserved. | <a href="mailto:privacy@kidstodo.vip" style="color:#9ca3af;">privacy@kidstodo.vip</a></p>
+  </footer>
+</body>
+</html>
