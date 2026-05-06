@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「もう少しだけゲームしたい!」を解決する — KidsToDo 保護者ガイド</title>
+  <meta name="description" content="子どもの『もうちょっとゲーム!』に毎日疲れていませんか? KidsToDoは、画面時間をポイント制にして親が悪者にならない仕組みです。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans',
+                   'Noto Sans CJK JP', sans-serif;
+      background: #FFFCF8; color: #2D2A26; line-height: 1.75; overflow-x: hidden;
+    }
+
+    /* ── Hero (Pain → Solution) ─────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #FFB084 0%, #FFA85F 50%, #FF8E53 100%);
+      color: white; padding: 64px 20px 56px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 40px; background: #FFFCF8; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    .lang-bar { position: absolute; top: 16px; right: 16px; display: flex; gap: 6px; }
+    .lang-bar a {
+      color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px;
+      font-weight: 700; padding: 4px 12px; border-radius: 99px;
+      background: rgba(255,255,255,0.18);
+    }
+    .lang-bar a.active { background: white; color: #D88D5E; }
+    .hero-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .hero-tag {
+      display: inline-block; background: rgba(255,255,255,0.25);
+      color: white; font-size: 12px; font-weight: 800; letter-spacing: 1px;
+      padding: 6px 14px; border-radius: 99px; margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: 38px; font-weight: 900; margin-bottom: 16px;
+      letter-spacing: -0.6px; line-height: 1.2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .hero h1 em { font-style: normal; color: #FFE082; }
+    .hero-sub {
+      font-size: 18px; opacity: 0.95; max-width: 580px; margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .hero-bubbles {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+      max-width: 600px; margin: 0 auto;
+    }
+    .hero-bubbles .bubble {
+      background: rgba(255,255,255,0.25); color: white;
+      padding: 8px 14px; border-radius: 99px;
+      font-size: 14px; font-weight: 700;
+    }
+
+    /* ── Container ─────────────────────────────────────── */
+    .container { max-width: 800px; margin: 0 auto; padding: 32px 20px 80px; }
+    .back-link {
+      display: inline-block; color: #8A8278; text-decoration: none;
+      font-size: 14px; font-weight: 700; margin-bottom: 24px;
+    }
+
+    /* ── BIG IDEA card (the "click" moment) ─────────────── */
+    .big-idea {
+      background: white; border-radius: 24px; padding: 36px 32px;
+      box-shadow: 0 12px 32px rgba(216,141,94,0.14);
+      margin-bottom: 48px;
+      border: 2px solid #FFEBDC;
+      position: relative;
+    }
+    .big-idea-tag {
+      position: absolute; top: -12px; left: 32px;
+      background: #FFB084; color: white;
+      font-size: 11px; font-weight: 900; letter-spacing: 1.5px;
+      padding: 6px 14px; border-radius: 99px;
+    }
+    .big-idea h2 {
+      font-size: 28px; font-weight: 900; color: #2D2A26;
+      letter-spacing: -0.5px; line-height: 1.3; margin-bottom: 16px;
+    }
+    .big-idea-arrow {
+      display: flex; align-items: center; gap: 12px;
+      margin: 24px 0; padding: 18px;
+      background: #FFF6EE; border-radius: 14px;
+      flex-wrap: wrap;
+    }
+    .arrow-side {
+      flex: 1; min-width: 0;
+      font-size: 14px; line-height: 1.6;
+    }
+    .arrow-side strong { display: block; font-size: 11px; color: #8A8278; font-weight: 800; letter-spacing: 1px; margin-bottom: 4px; }
+    .arrow-side .text { font-weight: 700; color: #2D2A26; font-size: 15px; }
+    .arrow-icon { font-size: 22px; color: #FFB084; }
+    .big-idea-lead {
+      font-size: 15px; color: #5C544D; line-height: 1.85; margin-top: 12px;
+    }
+
+    /* ── Scenarios (the magic in action) ───────────────── */
+    .scenarios { margin-bottom: 48px; }
+    .scen-title {
+      font-size: 24px; font-weight: 900; color: #2D2A26;
+      letter-spacing: -0.3px; text-align: center; margin-bottom: 8px;
+    }
+    .scen-sub {
+      text-align: center; color: #8A8278; font-size: 14px;
+      font-weight: 700; margin-bottom: 28px;
+    }
+    .scenario {
+      background: white; border-radius: 18px; padding: 22px;
+      margin-bottom: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+    .scen-num {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, #FFB084, #FF8E53);
+      color: white; font-weight: 900; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(255,176,132,0.4);
+    }
+    .scen-body { flex: 1; }
+    .scen-kid {
+      background: #B5D5FF; color: #1B3A5C;
+      padding: 8px 14px; border-radius: 14px 14px 14px 4px;
+      font-size: 14px; font-weight: 700; display: inline-block;
+      margin-bottom: 10px; max-width: 100%;
+    }
+    .scen-parent {
+      background: #FFEBDC; color: #2D2A26;
+      padding: 8px 14px; border-radius: 14px 14px 4px 14px;
+      font-size: 14px; font-weight: 700; display: inline-block;
+      margin-left: 24px; max-width: calc(100% - 24px);
+    }
+    .scen-result {
+      margin-top: 10px; font-size: 13px; color: #5C544D;
+      font-weight: 600; line-height: 1.6;
+      padding-top: 10px; border-top: 1px dashed #ECE3D8;
+    }
+    .scen-result strong { color: #1B5E3F; }
+
+    /* ── Section headers ───────────────────────────────── */
+    .section { margin-bottom: 56px; }
+    .section-tag {
+      display: inline-block; background: #FFEBDC; color: #D88D5E;
+      font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+      padding: 4px 10px; border-radius: 99px; margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 24px; font-weight: 900; color: #2D2A26;
+      letter-spacing: -0.3px; margin-bottom: 8px; line-height: 1.3;
+    }
+    .section-lead {
+      font-size: 15px; color: #5C544D; margin-bottom: 24px; line-height: 1.7;
+    }
+
+    /* ── Setup steps (numbered) ────────────────────────── */
+    .step {
+      background: white; border-radius: 18px; padding: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      margin-bottom: 14px; display: flex; gap: 20px;
+      align-items: flex-start;
+    }
+    .step-num {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, #FFB084, #FF8E53);
+      color: white; font-weight: 900; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(255,176,132,0.4);
+    }
+    .step-body { flex: 1; }
+    .step-title {
+      font-size: 17px; font-weight: 800; color: #2D2A26; margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 14px; color: #5C544D; line-height: 1.75;
+    }
+    .step-desc strong { color: #2D2A26; }
+    .step-example {
+      margin-top: 12px; padding: 12px 16px; background: #FFF6EE;
+      border-left: 3px solid #FFB084; border-radius: 8px;
+      font-size: 13px; color: #5C544D; line-height: 1.7;
+    }
+    .step-example .label {
+      font-size: 10px; font-weight: 800; color: #D88D5E;
+      letter-spacing: 1px; display: block; margin-bottom: 4px;
+    }
+    .step-example .pt { color: #D88D5E; font-weight: 800; }
+
+    /* ── Why this works (psychology) ───────────────────── */
+    .why {
+      background: linear-gradient(135deg, #FFF6EE 0%, #FFEBDC 100%);
+      border-radius: 20px; padding: 32px;
+      margin-bottom: 48px; border: 1.5px solid #FFD4B0;
+    }
+    .why h3 {
+      font-size: 22px; font-weight: 900; color: #2D2A26;
+      letter-spacing: -0.3px; margin-bottom: 18px;
+    }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+    }
+    .why-item {
+      background: white; border-radius: 14px; padding: 18px;
+    }
+    .why-item-emoji { font-size: 28px; margin-bottom: 8px; display: block; }
+    .why-item-title { font-size: 15px; font-weight: 800; color: #2D2A26; margin-bottom: 4px; }
+    .why-item-desc { font-size: 13px; color: #5C544D; line-height: 1.6; }
+
+    /* ── More features (compact list) ──────────────────── */
+    .more-features {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+    }
+    .feature {
+      background: white; border-radius: 16px; padding: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      border: 1.5px solid #F4ECE2;
+    }
+    .feature-emoji { font-size: 28px; margin-bottom: 8px; display: block; }
+    .feature-title { font-size: 15px; font-weight: 800; color: #2D2A26; margin-bottom: 4px; }
+    .feature-desc { font-size: 13px; color: #5C544D; line-height: 1.6; }
+
+    /* ── Safety callout ─────────────────────────────────── */
+    .callout {
+      background: #FFFCF8; border: 2px solid #ECE3D8;
+      border-radius: 18px; padding: 22px;
+      margin-bottom: 48px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .callout-emoji {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+      background: #A8E6CF; font-size: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .callout-body { flex: 1; }
+    .callout-title { font-size: 15px; font-weight: 800; color: #2D2A26; margin-bottom: 4px; }
+    .callout-desc { font-size: 13px; color: #5C544D; line-height: 1.7; }
+
+    /* ── Closing CTA ───────────────────────────────────── */
+    .cta {
+      background: linear-gradient(135deg, #FFB084, #FF8E53);
+      border-radius: 24px; padding: 36px 28px;
+      text-align: center; color: white;
+      box-shadow: 0 12px 28px rgba(255,142,83,0.3);
+    }
+    .cta h3 { font-size: 22px; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .cta p { font-size: 14px; opacity: 0.95; margin-bottom: 20px; line-height: 1.6; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cta a {
+      display: inline-block; background: white; color: #D88D5E;
+      text-decoration: none; padding: 12px 22px; border-radius: 99px;
+      font-weight: 800; font-size: 14px;
+    }
+    .cta a.ghost {
+      background: transparent; color: white; border: 2px solid rgba(255,255,255,0.7);
+    }
+
+    /* ── Mobile ────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero { padding: 48px 16px 40px; }
+      .hero h1 { font-size: 28px; }
+      .hero-sub { font-size: 15px; }
+      .container { padding: 20px 14px 60px; }
+      .big-idea { padding: 26px 22px; }
+      .big-idea h2 { font-size: 22px; }
+      .big-idea-arrow { flex-direction: column; align-items: stretch; }
+      .arrow-icon { transform: rotate(90deg); align-self: center; }
+      .scenario { flex-direction: column; gap: 14px; padding: 18px; }
+      .scen-num { align-self: flex-start; }
+      .why-grid, .more-features { grid-template-columns: 1fr; }
+      .step { padding: 18px; gap: 14px; }
+      .step-num { width: 32px; height: 32px; font-size: 14px; }
+      .step-title { font-size: 15px; }
+      .step-desc { font-size: 13px; }
+      .section-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════════
+       HERO — pain in 2 seconds, solution in 5
+       ════════════════════════════════════════════════════ -->
+  <div class="hero">
+    <div class="lang-bar">
+      <a href="parent-guide.html" class="active">日本語</a>
+      <a href="parent-guide-en.html">EN</a>
+      <a href="parent-guide-zh.html">中文</a>
+    </div>
+    <div class="hero-inner">
+      <span class="hero-tag">毎日のあれを終わらせる</span>
+      <h1>「あと10分だけ!」<br>もう、<em>言わせません</em>。</h1>
+      <p class="hero-sub">
+        画面時間をポイント制に。子どもがタスクと勉強で<strong>自分で稼いだポイント</strong>で、ゲーム・動画・iPadと交換します。<br>
+        「ダメ」と言うのは<strong>あなたではなく、ポイント残高</strong>。
+      </p>
+      <div class="hero-bubbles">
+        <span class="bubble">💬「もうちょっとゲームしたい!」</span>
+        <span class="bubble">💬「YouTubeあと10分!」</span>
+        <span class="bubble">💬「タブレット貸して〜」</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <a href="index.html" class="back-link">← トップに戻る</a>
+
+    <!-- ════════════════════════════════════════════════
+         BIG IDEA — the "ah-ha" moment
+         ════════════════════════════════════════════════ -->
+    <div class="big-idea">
+      <span class="big-idea-tag">仕組みの全体像</span>
+      <h2>親が「ノー」を言わなくていい仕組み。</h2>
+
+      <div class="big-idea-arrow">
+        <div class="arrow-side">
+          <strong>稼ぐ</strong>
+          <span class="text">タスク・お手伝い・勉強で<br>ポイントを貯める</span>
+        </div>
+        <span class="arrow-icon">→</span>
+        <div class="arrow-side">
+          <strong>使う</strong>
+          <span class="text">ゲーム30分・YouTube15分など<br>画面時間と交換</span>
+        </div>
+      </div>
+
+      <p class="big-idea-lead">
+        「もう少し遊びたい」と言われても、<strong>「ポイントが足りないね、タスクをやるか勉強するかしよう」</strong>と返すだけ。
+        親は判定するだけ、子どもは自分で計画する。怒鳴る・ねだる・ケンカする時間が消えます。
+      </p>
+    </div>
+
+    <!-- ════════════════════════════════════════════════
+         SCENARIOS — show the magic, don't tell
+         ════════════════════════════════════════════════ -->
+    <div class="scenarios">
+      <h2 class="scen-title">こんな会話、ありませんか?</h2>
+      <p class="scen-sub">KidsToDoを使うと、こうなります</p>
+
+      <div class="scenario">
+        <div class="scen-num">1</div>
+        <div class="scen-body">
+          <div class="scen-kid">「ゲーム1時間したい!」</div>
+          <div class="scen-parent">「今150ptあるね。1時間=200ptだから、あと50pt足りないよ」</div>
+          <div class="scen-result">
+            ➜ 子ども:<strong>「じゃあ宿題やってくる!」</strong> 自分から机に向かう。<br>
+            親は怒らない、説得しない、罪悪感もない。
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scen-num">2</div>
+        <div class="scen-body">
+          <div class="scen-kid">「YouTube見ていい?」</div>
+          <div class="scen-parent">「いいよ、ポイント使う?15分=50ptだよ」</div>
+          <div class="scen-result">
+            ➜ 子ども:<strong>「やっぱり10分だけにする」</strong> 自分で時間を選ぶように。<br>
+            「いつでも見ていいよ、自分のポイントだから」が魔法のフレーズに。
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scen-num">3</div>
+        <div class="scen-body">
+          <div class="scen-kid">「もう1回だけ!最後の1回!」</div>
+          <div class="scen-parent">「残り20pt、もう厳しいね。明日もある。」</div>
+          <div class="scen-result">
+            ➜ 子ども: しぶしぶ納得。「ゲーム→今日はもうムリ→寝る」が自然な流れに。<br>
+            <strong>ルールは数字。親は悪者じゃなくなる。</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scen-num">4</div>
+        <div class="scen-body">
+          <div class="scen-kid">「学校から帰ってきた、何しよう?」</div>
+          <div class="scen-parent">— 何も言う必要なし —</div>
+          <div class="scen-result">
+            ➜ 子ども: アプリを開く →「今日のタスクが3つ残ってる、あと60pt稼げる」→ 自分で進める。<br>
+            <strong>『指示待ち』が『自分で考える』に変わる。</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════
+         WHY THIS WORKS — psychology backing
+         ════════════════════════════════════════════════ -->
+    <div class="why">
+      <h3>🧠 なぜこれが効くのか</h3>
+      <div class="why-grid">
+        <div class="why-item">
+          <span class="why-item-emoji">🛡️</span>
+          <div class="why-item-title">親が悪者じゃなくなる</div>
+          <div class="why-item-desc">ルールを決めているのはアプリ。「ダメと言うパパ・ママ」から「一緒に応援する人」へ役割が変わります。</div>
+        </div>
+        <div class="why-item">
+          <span class="why-item-emoji">🎯</span>
+          <div class="why-item-title">子どもに主導権が戻る</div>
+          <div class="why-item-desc">「やらされる」じゃなく「自分のために稼ぐ」。内発的動機(自分でやりたい気持ち)が育ちます。</div>
+        </div>
+        <div class="why-item">
+          <span class="why-item-emoji">💰</span>
+          <div class="why-item-title">お金もお菓子もいらない</div>
+          <div class="why-item-desc">ご褒美が「自分の好きな時間」だから、物質的なご褒美に頼らずに動機づけができます。</div>
+        </div>
+        <div class="why-item">
+          <span class="why-item-emoji">📚</span>
+          <div class="why-item-title">勉強が苦痛じゃなくなる</div>
+          <div class="why-item-desc">「勉強しなさい」じゃなく「ポイント稼ぎたいから自分でやる」。学習5分で10pt、塵も積もって30分の追加ゲーム時間に。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════
+         SETUP — how to get started in 5 min
+         ════════════════════════════════════════════════ -->
+    <div class="section">
+      <span class="section-tag">セットアップ</span>
+      <h2 class="section-title">5分でスタート</h2>
+      <p class="section-lead">
+        最初の1日で仕組みを作れば、あとは子どもが自分で回します。
+      </p>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">アプリをダウンロードして親アカウントを作る</div>
+          <div class="step-desc">
+            App Storeから無料ダウンロード。「保護者」を選んでメール登録。続けて<strong>お子さまの名前と学年</strong>を入力すると、お子さま専用のログイン情報が作成されます。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">ご褒美 = 画面時間を設定する</div>
+          <div class="step-desc">
+            お子さまが<strong>ウィッシュリスト</strong>から自分でリクエストできます。親は承認するだけ。最初は親側で例を入れておくとスムーズです。
+          </div>
+          <div class="step-example">
+            <span class="label">設定例</span>
+            ・ゲーム30分 = <span class="pt">100pt</span><br>
+            ・YouTube15分 = <span class="pt">50pt</span><br>
+            ・iPad自由時間1時間 = <span class="pt">200pt</span><br>
+            ・友達と外出1時間 = <span class="pt">80pt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">ポイントの稼ぎ方 = タスクを設定する</div>
+          <div class="step-desc">
+            毎日のタスク・お手伝い・宿題・勉強など、ポイント源となる行動を登録します。<strong>タスク完了 → 親が承認 → ポイント加算</strong>の流れ。
+          </div>
+          <div class="step-example">
+            <span class="label">設定例</span>
+            ・歯みがき = <span class="pt">+10pt</span> (毎日)<br>
+            ・宿題 = <span class="pt">+30pt</span> (毎日)<br>
+            ・お皿洗い = <span class="pt">+15pt</span> (週2回)<br>
+            ・部屋の掃除 = <span class="pt">+50pt</span> (週末)<br>
+            ・読書30分 = <span class="pt">+20pt</span> (毎日)
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">学習で追加ポイント — 勉強もご褒美に</div>
+          <div class="step-desc">
+            アプリ内に小1〜小6の<strong>算数・国語・理科・社会のクイズ</strong>を約1万問収録。1問正解で2pt、5問続けて全問正解でボーナス10ptなど。子どもは「あと20pt欲しい」と思ったら、自分で勉強しに行きます。
+          </div>
+          <div class="step-example">
+            <span class="label">学習で稼げる例</span>
+            ・5問正解 = <span class="pt">+10pt</span><br>
+            ・10問連続正解 = <span class="pt">+25pt</span> (ボーナス)<br>
+            ・毎日続けると「ストリーク」が伸びてさらにボーナス
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">完成。あとは見守るだけ。</div>
+          <div class="step-desc">
+            お子さまは<strong>自分のホーム画面</strong>で「今日のタスク」「ポイント残高」「次のご褒美まであと何pt」を見ながら、自分で計画します。<br>
+            親は<strong>提出があったとき承認</strong>するだけ。「やりなさい」のリマインダーが激減します。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════
+         OTHER FEATURES — supporting cast
+         ════════════════════════════════════════════════ -->
+    <div class="section">
+      <span class="section-tag">そのほかの機能</span>
+      <h2 class="section-title">続けやすくする仕組み</h2>
+      <p class="section-lead">
+        「最初の3日は燃えても、1週間で挫折」を防ぐためのデザイン。
+      </p>
+
+      <div class="more-features">
+        <div class="feature">
+          <span class="feature-emoji">🐠</span>
+          <div class="feature-title">バーチャルペット</div>
+          <div class="feature-desc">タスクと勉強でペットが進化。9種類の冒険コース(海・森・宇宙・恐竜など)。子どもにとって「続ける理由」になります。</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">🔥</span>
+          <div class="feature-title">連続日数(ストリーク)</div>
+          <div class="feature-desc">毎日アプリを開くと記録が伸びます。3日・7日・14日でバッジを獲得。習慣化を強くサポート。</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">📊</span>
+          <div class="feature-title">毎週レポート</div>
+          <div class="feature-desc">お子さまの完了率・科目別の成長を毎週まとめて確認。「今週は算数が伸びた」がひと目でわかります。</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">👨‍👩‍👧</span>
+          <div class="feature-title">パパも一緒に管理</div>
+          <div class="feature-desc">共同保護者を招待して、家族で同じダッシュボードを共有。誰が承認してもOK。</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">🌙</span>
+          <div class="feature-title">休みの日設定</div>
+          <div class="feature-desc">日曜日や旅行中は「ペナルティなし・ストリーク継続」に。家族の予定に合わせられます。</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">🔔</span>
+          <div class="feature-title">通知も自動でやさしく</div>
+          <div class="feature-desc">21:00〜7:00は通知サイレント。お子さまにストレスを与えない設計。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════
+         SAFETY callout
+         ════════════════════════════════════════════════ -->
+    <div class="callout">
+      <div class="callout-emoji">🛡️</div>
+      <div class="callout-body">
+        <div class="callout-title">プライバシーを守る設計</div>
+        <div class="callout-desc">
+          COPPA準拠。<strong>広告なし・チャット機能なし・第三者へのデータ販売なし</strong>。
+          すべて家族内で完結し、お子さまの情報は最小限のみ保存されます。
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════
+         CTA
+         ════════════════════════════════════════════════ -->
+    <div class="cta">
+      <h3>家族の毎日が、変わります</h3>
+      <p>無料プランで1人のお子さまから今日始められます。<br>App Storeからダウンロード、5分でセットアップ完了。</p>
+      <div class="cta-buttons">
+        <a href="https://apps.apple.com/app/id6761820738" target="_blank">App Storeで開く</a>
+        <a href="help.html" class="ghost">よくある質問</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

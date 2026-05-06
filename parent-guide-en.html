@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop the "Just 10 more minutes!" battles — KidsToDo Parent Guide</title>
+  <meta name="description" content="Tired of saying no to more screen time? KidsToDo turns screen time into points your kid earns from chores and learning. You stop being the bad guy.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #FFFCF8; color: #2D2A26; line-height: 1.7; overflow-x: hidden;
+    }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #FFB084 0%, #FFA85F 50%, #FF8E53 100%);
+      color: white; padding: 64px 20px 56px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 40px; background: #FFFCF8; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    .lang-bar { position: absolute; top: 16px; right: 16px; display: flex; gap: 6px; }
+    .lang-bar a {
+      color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px;
+      font-weight: 700; padding: 4px 12px; border-radius: 99px;
+      background: rgba(255,255,255,0.18);
+    }
+    .lang-bar a.active { background: white; color: #D88D5E; }
+    .hero-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .hero-tag {
+      display: inline-block; background: rgba(255,255,255,0.25);
+      color: white; font-size: 12px; font-weight: 800; letter-spacing: 1px;
+      padding: 6px 14px; border-radius: 99px; margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: 38px; font-weight: 900; margin-bottom: 16px;
+      letter-spacing: -0.6px; line-height: 1.2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .hero h1 em { font-style: normal; color: #FFE082; }
+    .hero-sub {
+      font-size: 18px; opacity: 0.95; max-width: 580px; margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+    .hero-bubbles {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+      max-width: 600px; margin: 0 auto;
+    }
+    .hero-bubbles .bubble {
+      background: rgba(255,255,255,0.25); color: white;
+      padding: 8px 14px; border-radius: 99px;
+      font-size: 14px; font-weight: 700;
+    }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 32px 20px 80px; }
+    .back-link {
+      display: inline-block; color: #8A8278; text-decoration: none;
+      font-size: 14px; font-weight: 700; margin-bottom: 24px;
+    }
+
+    /* ── BIG IDEA card ────────────────────────────────── */
+    .big-idea {
+      background: white; border-radius: 24px; padding: 36px 32px;
+      box-shadow: 0 12px 32px rgba(216,141,94,0.14);
+      margin-bottom: 48px; border: 2px solid #FFEBDC; position: relative;
+    }
+    .big-idea-tag {
+      position: absolute; top: -12px; left: 32px;
+      background: #FFB084; color: white;
+      font-size: 11px; font-weight: 900; letter-spacing: 1.5px;
+      padding: 6px 14px; border-radius: 99px;
+    }
+    .big-idea h2 {
+      font-size: 28px; font-weight: 900; color: #2D2A26;
+      letter-spacing: -0.5px; line-height: 1.3; margin-bottom: 16px;
+    }
+    .big-idea-arrow {
+      display: flex; align-items: center; gap: 12px;
+      margin: 24px 0; padding: 18px;
+      background: #FFF6EE; border-radius: 14px; flex-wrap: wrap;
+    }
+    .arrow-side { flex: 1; min-width: 0; font-size: 14px; line-height: 1.6; }
+    .arrow-side strong { display: block; font-size: 11px; color: #8A8278; font-weight: 800; letter-spacing: 1px; margin-bottom: 4px; }
+    .arrow-side .text { font-weight: 700; color: #2D2A26; font-size: 15px; }
+    .arrow-icon { font-size: 22px; color: #FFB084; }
+    .big-idea-lead {
+      font-size: 15px; color: #5C544D; line-height: 1.8; margin-top: 12px;
+    }
+
+    /* ── Scenarios ───────────────────────────────────── */
+    .scenarios { margin-bottom: 48px; }
+    .scen-title {
+      font-size: 24px; font-weight: 900; color: #2D2A26;
+      letter-spacing: -0.3px; text-align: center; margin-bottom: 8px;
+    }
+    .scen-sub {
+      text-align: center; color: #8A8278; font-size: 14px;
+      font-weight: 700; margin-bottom: 28px;
+    }
+    .scenario {
+      background: white; border-radius: 18px; padding: 22px;
+      margin-bottom: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+    .scen-num {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, #FFB084, #FF8E53);
+      color: white; font-weight: 900; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(255,176,132,0.4);
+    }
+    .scen-body { flex: 1; }
+    .scen-kid {
+      background: #B5D5FF; color: #1B3A5C;
+      padding: 8px 14px; border-radius: 14px 14px 14px 4px;
+      font-size: 14px; font-weight: 700; display: inline-block;
+      margin-bottom: 10px; max-width: 100%;
+    }
+    .scen-parent {
+      background: #FFEBDC; color: #2D2A26;
+      padding: 8px 14px; border-radius: 14px 14px 4px 14px;
+      font-size: 14px; font-weight: 700; display: inline-block;
+      margin-left: 24px; max-width: calc(100% - 24px);
+    }
+    .scen-result {
+      margin-top: 10px; font-size: 13px; color: #5C544D;
+      font-weight: 600; line-height: 1.6;
+      padding-top: 10px; border-top: 1px dashed #ECE3D8;
+    }
+    .scen-result strong { color: #1B5E3F; }
+
+    /* ── Sections ────────────────────────────────────── */
+    .section { margin-bottom: 56px; }
+    .section-tag {
+      display: inline-block; background: #FFEBDC; color: #D88D5E;
+      font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+      padding: 4px 10px; border-radius: 99px; margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 24px; font-weight: 900; color: #2D2A26;
+      letter-spacing: -0.3px; margin-bottom: 8px; line-height: 1.3;
+    }
+    .section-lead {
+      font-size: 15px; color: #5C544D; margin-bottom: 24px; line-height: 1.7;
+    }
+
+    /* ── Steps ───────────────────────────────────────── */
+    .step {
+      background: white; border-radius: 18px; padding: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      margin-bottom: 14px; display: flex; gap: 20px; align-items: flex-start;
+    }
+    .step-num {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, #FFB084, #FF8E53);
+      color: white; font-weight: 900; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(255,176,132,0.4);
+    }
+    .step-body { flex: 1; }
+    .step-title {
+      font-size: 17px; font-weight: 800; color: #2D2A26; margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 14px; color: #5C544D; line-height: 1.7;
+    }
+    .step-desc strong { color: #2D2A26; }
+    .step-example {
+      margin-top: 12px; padding: 12px 16px; background: #FFF6EE;
+      border-left: 3px solid #FFB084; border-radius: 8px;
+      font-size: 13px; color: #5C544D; line-height: 1.7;
+    }
+    .step-example .label {
+      font-size: 10px; font-weight: 800; color: #D88D5E;
+      letter-spacing: 1px; display: block; margin-bottom: 4px;
+    }
+    .step-example .pt { color: #D88D5E; font-weight: 800; }
+
+    /* ── Why this works ───────────────────────────────── */
+    .why {
+      background: linear-gradient(135deg, #FFF6EE 0%, #FFEBDC 100%);
+      border-radius: 20px; padding: 32px;
+      margin-bottom: 48px; border: 1.5px solid #FFD4B0;
+    }
+    .why h3 {
+      font-size: 22px; font-weight: 900; color: #2D2A26;
+      letter-spacing: -0.3px; margin-bottom: 18px;
+    }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+    }
+    .why-item {
+      background: white; border-radius: 14px; padding: 18px;
+    }
+    .why-item-emoji { font-size: 28px; margin-bottom: 8px; display: block; }
+    .why-item-title { font-size: 15px; font-weight: 800; color: #2D2A26; margin-bottom: 4px; }
+    .why-item-desc { font-size: 13px; color: #5C544D; line-height: 1.6; }
+
+    /* ── More features ────────────────────────────────── */
+    .more-features {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+    }
+    .feature {
+      background: white; border-radius: 16px; padding: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      border: 1.5px solid #F4ECE2;
+    }
+    .feature-emoji { font-size: 28px; margin-bottom: 8px; display: block; }
+    .feature-title { font-size: 15px; font-weight: 800; color: #2D2A26; margin-bottom: 4px; }
+    .feature-desc { font-size: 13px; color: #5C544D; line-height: 1.6; }
+
+    /* ── Safety ───────────────────────────────────────── */
+    .callout {
+      background: #FFFCF8; border: 2px solid #ECE3D8;
+      border-radius: 18px; padding: 22px;
+      margin-bottom: 48px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .callout-emoji {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+      background: #A8E6CF; font-size: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .callout-body { flex: 1; }
+    .callout-title { font-size: 15px; font-weight: 800; color: #2D2A26; margin-bottom: 4px; }
+    .callout-desc { font-size: 13px; color: #5C544D; line-height: 1.7; }
+
+    /* ── CTA ──────────────────────────────────────────── */
+    .cta {
+      background: linear-gradient(135deg, #FFB084, #FF8E53);
+      border-radius: 24px; padding: 36px 28px;
+      text-align: center; color: white;
+      box-shadow: 0 12px 28px rgba(255,142,83,0.3);
+    }
+    .cta h3 { font-size: 22px; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .cta p { font-size: 14px; opacity: 0.95; margin-bottom: 20px; line-height: 1.6; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cta a {
+      display: inline-block; background: white; color: #D88D5E;
+      text-decoration: none; padding: 12px 22px; border-radius: 99px;
+      font-weight: 800; font-size: 14px;
+    }
+    .cta a.ghost {
+      background: transparent; color: white; border: 2px solid rgba(255,255,255,0.7);
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 48px 16px 40px; }
+      .hero h1 { font-size: 28px; }
+      .hero-sub { font-size: 15px; }
+      .container { padding: 20px 14px 60px; }
+      .big-idea { padding: 26px 22px; }
+      .big-idea h2 { font-size: 22px; }
+      .big-idea-arrow { flex-direction: column; align-items: stretch; }
+      .arrow-icon { transform: rotate(90deg); align-self: center; }
+      .scenario { flex-direction: column; gap: 14px; padding: 18px; }
+      .scen-num { align-self: flex-start; }
+      .why-grid, .more-features { grid-template-columns: 1fr; }
+      .step { padding: 18px; gap: 14px; }
+      .step-num { width: 32px; height: 32px; font-size: 14px; }
+      .step-title { font-size: 15px; }
+      .step-desc { font-size: 13px; }
+      .section-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="lang-bar">
+      <a href="parent-guide.html">日本語</a>
+      <a href="parent-guide-en.html" class="active">EN</a>
+      <a href="parent-guide-zh.html">中文</a>
+    </div>
+    <div class="hero-inner">
+      <span class="hero-tag">END THE DAILY BATTLE</span>
+      <h1>"Just 10 more minutes!"<br>You'll <em>never hear it again</em>.</h1>
+      <p class="hero-sub">
+        Turn screen time into points your child <strong>earns by doing chores and learning</strong>, then spends on games, YouTube, or iPad time.<br>
+        The one saying "no" stops being you — it's their <strong>point balance</strong>.
+      </p>
+      <div class="hero-bubbles">
+        <span class="bubble">💬 "Can I play one more round?"</span>
+        <span class="bubble">💬 "Just one more YouTube video!"</span>
+        <span class="bubble">💬 "Can I have the iPad?"</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <a href="index-en.html" class="back-link">← Back to home</a>
+
+    <!-- BIG IDEA -->
+    <div class="big-idea">
+      <span class="big-idea-tag">HOW IT WORKS</span>
+      <h2>You stop being the one who says "no."</h2>
+
+      <div class="big-idea-arrow">
+        <div class="arrow-side">
+          <strong>EARN</strong>
+          <span class="text">Tasks, chores, and learning<br>build up points</span>
+        </div>
+        <span class="arrow-icon">→</span>
+        <div class="arrow-side">
+          <strong>SPEND</strong>
+          <span class="text">Trade points for game time,<br>YouTube, iPad, etc.</span>
+        </div>
+      </div>
+
+      <p class="big-idea-lead">
+        Next time they ask for more screen time, you say <strong>"Not enough points yet — do a task or some learning."</strong>
+        You're the referee, not the villain. They plan their own day. The arguing, begging, and yelling — gone.
+      </p>
+    </div>
+
+    <!-- SCENARIOS -->
+    <div class="scenarios">
+      <h2 class="scen-title">Sound familiar?</h2>
+      <p class="scen-sub">With KidsToDo, here's what these conversations look like</p>
+
+      <div class="scenario">
+        <div class="scen-num">1</div>
+        <div class="scen-body">
+          <div class="scen-kid">"Can I play games for an hour?"</div>
+          <div class="scen-parent">"You have 150 pt. An hour costs 200 pt — you're 50 short."</div>
+          <div class="scen-result">
+            ➜ Kid: <strong>"Then I'll go finish my homework!"</strong> Walks themselves to the desk.<br>
+            No yelling, no convincing, no guilt.
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scen-num">2</div>
+        <div class="scen-body">
+          <div class="scen-kid">"Can I watch YouTube?"</div>
+          <div class="scen-parent">"Sure, want to spend points? 15 min = 50 pt."</div>
+          <div class="scen-result">
+            ➜ Kid: <strong>"Actually, let me just do 10 minutes."</strong> Picks their own limit.<br>
+            "Whenever you want, it's your points" becomes the magic phrase.
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scen-num">3</div>
+        <div class="scen-body">
+          <div class="scen-kid">"Just one more round! Last one!"</div>
+          <div class="scen-parent">"You have 20 pt left — not enough today. Tomorrow's a new day."</div>
+          <div class="scen-result">
+            ➜ Kid: Reluctantly accepts. The "Game → out of points → bedtime" flow becomes natural.<br>
+            <strong>The rule is the number. You stop being the bad guy.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scen-num">4</div>
+        <div class="scen-body">
+          <div class="scen-kid">"I'm home from school — what should I do?"</div>
+          <div class="scen-parent">— You don't say anything —</div>
+          <div class="scen-result">
+            ➜ Kid: Opens app → "I have 3 tasks left, 60 pt to earn" → does them on their own.<br>
+            <strong>"Waiting to be told" turns into "thinking for themselves."</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY -->
+    <div class="why">
+      <h3>🧠 Why this actually works</h3>
+      <div class="why-grid">
+        <div class="why-item">
+          <span class="why-item-emoji">🛡️</span>
+          <div class="why-item-title">You're not the villain anymore</div>
+          <div class="why-item-desc">The app sets the rules. You shift from "the parent who says no" to "the parent cheering them on."</div>
+        </div>
+        <div class="why-item">
+          <span class="why-item-emoji">🎯</span>
+          <div class="why-item-title">They take ownership</div>
+          <div class="why-item-desc">Not "forced to" but "earning what they want." Intrinsic motivation grows over time.</div>
+        </div>
+        <div class="why-item">
+          <span class="why-item-emoji">💰</span>
+          <div class="why-item-title">No money or sweets needed</div>
+          <div class="why-item-desc">The reward is their own free time — no need to bribe with treats or cash to motivate them.</div>
+        </div>
+        <div class="why-item">
+          <span class="why-item-emoji">📚</span>
+          <div class="why-item-title">Learning stops being a chore</div>
+          <div class="why-item-desc">Not "you must study" — "I want points so I'll study." 5 min of learning = 10 pt, which adds up to a lot of game time.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETUP -->
+    <div class="section">
+      <span class="section-tag">SETUP</span>
+      <h2 class="section-title">Get started in 5 minutes</h2>
+      <p class="section-lead">
+        Set up the system once. After that, your child runs it themselves.
+      </p>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Download the app and create a parent account</div>
+          <div class="step-desc">
+            Free download from the App Store. Pick "Parent," sign up with email. Then enter <strong>your child's name and grade</strong> — the app generates a kid login for them automatically.
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Set rewards = screen time</div>
+          <div class="step-desc">
+            Your kid can request rewards through their <strong>Wishlist</strong>. You just approve. Adding a few defaults at the start helps things flow.
+          </div>
+          <div class="step-example">
+            <span class="label">EXAMPLES</span>
+            • 30 min gaming = <span class="pt">100 pt</span><br>
+            • 15 min YouTube = <span class="pt">50 pt</span><br>
+            • 1 hour iPad time = <span class="pt">200 pt</span><br>
+            • 1 hour playing outside with friends = <span class="pt">80 pt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Set up earning tasks</div>
+          <div class="step-desc">
+            Daily routines, chores, homework, healthy habits — everything that gives points. <strong>Kid does it → you approve → points credited</strong>.
+          </div>
+          <div class="step-example">
+            <span class="label">EXAMPLES</span>
+            • Brush teeth = <span class="pt">+10 pt</span> (daily)<br>
+            • Homework = <span class="pt">+30 pt</span> (daily)<br>
+            • Wash dishes = <span class="pt">+15 pt</span> (twice a week)<br>
+            • Tidy room = <span class="pt">+50 pt</span> (weekend)<br>
+            • 30 min reading = <span class="pt">+20 pt</span> (daily)
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Bonus points from learning — make studying rewarding</div>
+          <div class="step-desc">
+            About 10,000 in-app quiz questions covering <strong>math, reading, science, social studies</strong> for elementary grades. 2 pt per correct answer, bonus 10 pt for streaks of 5. When the kid wants 20 more points, they go study — on their own.
+          </div>
+          <div class="step-example">
+            <span class="label">LEARNING EARNINGS</span>
+            • 5 correct answers = <span class="pt">+10 pt</span><br>
+            • 10 in a row = <span class="pt">+25 pt</span> (bonus)<br>
+            • Daily streak grows for additional bonuses
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">Done. Now just watch.</div>
+          <div class="step-desc">
+            On their <strong>own home screen</strong>, your kid sees today's tasks, point balance, and "X points to next reward" — and plans their own day.<br>
+            You just <strong>approve when they submit</strong>. The "did you do your homework?" reminders disappear.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MORE FEATURES -->
+    <div class="section">
+      <span class="section-tag">MORE</span>
+      <h2 class="section-title">Designed to keep working</h2>
+      <p class="section-lead">
+        Features that prevent the typical "fired up for 3 days, give up by week 1" trap.
+      </p>
+
+      <div class="more-features">
+        <div class="feature">
+          <span class="feature-emoji">🐠</span>
+          <div class="feature-title">Virtual pet</div>
+          <div class="feature-desc">Tasks and learning evolve a pet through 9 different adventure paths (Ocean, Forest, Space, Dino, etc.). A reason for kids to keep going.</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">🔥</span>
+          <div class="feature-title">Daily streaks</div>
+          <div class="feature-desc">Open the app daily and the streak grows. Badges at 3, 7, 14 days. Strong habit-formation engine.</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">📊</span>
+          <div class="feature-title">Weekly reports</div>
+          <div class="feature-desc">See completion rates and per-subject growth each week. "Math really jumped this week" at a glance.</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">👨‍👩‍👧</span>
+          <div class="feature-title">Co-parent in the same app</div>
+          <div class="feature-desc">Invite the other parent to share the same dashboard. Either of you can approve.</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">🌙</span>
+          <div class="feature-title">Rest day settings</div>
+          <div class="feature-desc">Sundays or vacations can be "no penalty, streak preserved" — fits your family rhythm.</div>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">🔔</span>
+          <div class="feature-title">Gentle, automatic notifications</div>
+          <div class="feature-desc">Silent from 9 PM to 7 AM. Designed not to stress your child out.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAFETY -->
+    <div class="callout">
+      <div class="callout-emoji">🛡️</div>
+      <div class="callout-body">
+        <div class="callout-title">Privacy by design</div>
+        <div class="callout-desc">
+          COPPA compliant. <strong>No ads, no chat features, no third-party data sales</strong>.
+          Everything stays inside your family. We collect the bare minimum about your child.
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <h3>Your family's daily life — about to change</h3>
+      <p>Free for 1 child. Set up in 5 minutes.<br>Download from the App Store today.</p>
+      <div class="cta-buttons">
+        <a href="https://apps.apple.com/app/id6761820738" target="_blank">Open in App Store</a>
+        <a href="help-en.html" class="ghost">FAQ</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
