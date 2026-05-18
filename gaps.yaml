@@ -1,0 +1,137 @@
+# =============================================================================
+# gaps.yaml — declarative gap registry for Task 3 (Step 5 response analysis).
+# -----------------------------------------------------------------------------
+# Each gap is a structured object with target + current values and a formula
+# that produces the **magnitude** in human-understandable units (units, days,
+# %). After every round of agent responses, GapCalculator re-evaluates every
+# gap, marks which ones are acceptable, and lets the orchestrator decide
+# which (if any) extra agent should be added next.
+#
+# Categories — match the 5 patent gap types (図3):
+#   value        — quantity / numeric shortfalls
+#   relation     — required precondition between resources (e.g. supplier LT)
+#   feasibility  — can a plan actually be executed
+#   time         — schedule / lead-time over-runs
+#   priority     — competing constraints unresolved
+#
+# Expression grammar
+#   target_expr / current_expr  → ${path.with.dots | default} placeholders.
+#                                  Resolved against namespaces:
+#                                    trigger.<field>      (the trigger dict)
+#                                    agent.<id>.<key>     (all_answers' expected_results)
+#                                    gap.<id>.magnitude   (already-computed gaps)
+#                                    gap.<id>.acceptable
+#   formula                      → Pure arithmetic on `target`, `current`,
+#                                  and the names above.  Allowed:
+#                                    + - * / // % **  max() min() abs() round()
+#                                    > >= < <= == !=  and or not  if/else
+#                                  Nothing else (no eval / exec / imports).
+#
+# Acceptable = `magnitude <= acceptable_threshold`. A gap with unresolved
+# target or current is marked `acceptable=False, status="unresolved"`.
+#
+# contributing_agents lists which agents can SHRINK this gap. Used by the
+# orchestrator to (a) rank candidate agents by potential reduction, and
+# (b) declare an agent "not helpful" (claim 6) when their response touched
+# none of the gaps' current_expr inputs.
+# =============================================================================
+schema_version: "1.0"
+
+gaps:
+
+  # ---------------------------------------------------------------------------
+  # (a) 値ギャップ — quantity shortfall
+  #
+  # Example (user-provided):
+  #   customer needs 300, storage has 200 → quantity_gap = 100 units
+  # ---------------------------------------------------------------------------
+  - gap_id:                  quantity_gap
+    kind:                    value
+    description_ja:          "顧客要求数量と即納可能数量の差"
+    target_expr:             "${trigger.requested_qty | 0}"
+    current_expr:            "${agent.prod_mgmt.finished_stock | 0}"
+    formula:                 "max(target - current, 0)"
+    unit:                    "units"
+    acceptable_threshold:    0
+    contributing_agents:
+      - { agent: prod_mgmt,   keys: [finished_stock],                       effect_ja: "現在庫を直接増やす" }
+      - { agent: mfg_line,    keys: [capacity, completion_time_estimate],   effect_ja: "追加生産で不足分を補う" }
+      - { agent: procurement, keys: [material_leadtime, expedite_days],     effect_ja: "材料調達で増産を可能にする" }
+
+  # ---------------------------------------------------------------------------
+  # (d) 時間ギャップ — manufacturing lead-time over deadline
+  #
+  # Example (user-provided):
+  #   need 3 days, mfg says 4 days to make the 100 shortfall → time_gap = 1 day
+  #
+  # Logic:
+  #   if quantity_gap.magnitude > 0 (i.e. there IS a shortfall):
+  #     manufacturing_days = ceil(quantity_gap.magnitude / mfg_line.capacity)
+  #     time_gap = max(manufacturing_days - trigger.due_days, 0)
+  #   else:
+  #     time_gap = 0 (in-stock; no manufacturing needed)
+  # ---------------------------------------------------------------------------
+  - gap_id:                  time_gap
+    kind:                    time
+    description_ja:          "不足分の製造日数が顧客納期を超える程度"
+    # We model `current` as the manufacturing-days needed for the shortfall.
+    # If gap.quantity_gap.magnitude is 0 (nothing to make), current=0.
+    target_expr:             "${trigger.due_days | 0}"
+    current_expr:            "${gap.quantity_gap.magnitude | 0}"
+    formula: >
+      max(
+        (current / max(${agent.mfg_line.capacity | 1}, 1)) - target,
+        0
+      )
+    unit:                    "days"
+    acceptable_threshold:    0
+    contributing_agents:
+      - { agent: mfg_line,    keys: [capacity, completion_time_estimate],     effect_ja: "増産能力で日数を短縮" }
+      - { agent: maintenance, keys: [available_hours_total, downtime_hours],  effect_ja: "ライン稼働時間を確保" }
+
+  # ---------------------------------------------------------------------------
+  # (c) 実現可能性ギャップ — can mfg actually make the shortfall in time?
+  #
+  # Magnitude > 0 means the requested quantity cannot fit even at full
+  # capacity within the available days, i.e. infeasible.
+  # ---------------------------------------------------------------------------
+  - gap_id:                  manufacturing_feasibility_gap
+    kind:                    feasibility
+    description_ja:          "不足数量を期限内に製造できる能力があるか"
+    target_expr:             "${gap.quantity_gap.magnitude | 0}"
+    current_expr:            "${agent.mfg_line.capacity | 0}"
+    formula:                 "max(target - (current * ${trigger.due_days | 0}), 0)"
+    unit:                    "units"
+    acceptable_threshold:    0
+    contributing_agents:
+      - { agent: mfg_line,    keys: [capacity, changeover_impact, line_utilization], effect_ja: "稼働可能能力の確認/増強" }
+      - { agent: maintenance, keys: [downtime_hours, maintenance_days_count],         effect_ja: "停止リスク低減で稼働率向上" }
+
+  # ---------------------------------------------------------------------------
+  # (b) 関係ギャップ — material lead-time relative to production deadline
+  # ---------------------------------------------------------------------------
+  - gap_id:                  supplier_leadtime_gap
+    kind:                    relation
+    description_ja:          "材料調達LTが製造開始期限を超える日数"
+    target_expr:             "${trigger.due_days | 0}"
+    current_expr:            "${agent.procurement.material_leadtime | 9999}"
+    formula:                 "max(current - target, 0)"
+    unit:                    "days"
+    acceptable_threshold:    1     # 1 day tolerance for relation gaps
+    contributing_agents:
+      - { agent: procurement, keys: [material_leadtime, expedite_days, switch_pct], effect_ja: "サプライヤ交渉や代替で LT 短縮" }
+
+  # ---------------------------------------------------------------------------
+  # (e) 優先度ギャップ — does the customer accept the delay?
+  # ---------------------------------------------------------------------------
+  - gap_id:                  customer_acceptance_gap
+    kind:                    priority
+    description_ja:          "顧客許容遅延に対する現状時間ギャップ超過"
+    target_expr:             "${agent.sales.customer_tolerance_days | 0}"
+    current_expr:            "${gap.time_gap.magnitude | 0}"
+    formula:                 "max(current - target, 0)"
+    unit:                    "days"
+    acceptable_threshold:    0
+    contributing_agents:
+      - { agent: sales,    keys: [customer_tolerance_days, latest_acceptable_delay, partial_delivery_accept], effect_ja: "顧客折衝で許容遅延を確認" }
+      - { agent: customer, keys: [response_time_hours],                                                       effect_ja: "顧客側の確認応答時間" }
